@@ -4,10 +4,9 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
-COPY ["GradeTrackerApp.API/GradeTrackerApp.API.csproj", "GradeTrackerApp.API/"]
-RUN dotnet restore "GradeTrackerApp.API/GradeTrackerApp.API.csproj"
+COPY ["GradeTrackerApp.API.csproj", "./"]
+RUN dotnet restore "GradeTrackerApp.API.csproj"
 COPY . .
-WORKDIR "/src/GradeTrackerApp.API"
 RUN dotnet build "GradeTrackerApp.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
