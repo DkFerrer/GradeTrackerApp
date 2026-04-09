@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GradeTrackerApp.Views.SubjectsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Teal Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="#1A8C7A"
+              Padding="24,50,24,20">
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="My Subjects"
+                           TextColor="White"
+                           FontSize="24"
+                           FontAttributes="Bold" />
+                    <Label Text="Academic Record"
+                           TextColor="#CCFFFFFF"
+                           FontSize="13" />
+                </VerticalStackLayout>
+
+                <!-- Add Button -->
+                <Frame Grid.Column="1"
+                       BackgroundColor="#2A9D8A"
+                       CornerRadius="20"
+                       Padding="0"
+                       BorderColor="Transparent"
+                       HeightRequest="40"
+                       WidthRequest="40"
+                       VerticalOptions="Center">
+                    <Label Text="+"
+                           TextColor="White"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAddSubjectClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Frame>
+            </Grid>
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="16" Padding="16">
+
+                <!-- Semester Tabs -->
+                <!-- Semester Tabs with Add Button -->
+                <ScrollView Orientation="Horizontal"
+            HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout x:Name="SemesterTabsLayout"
+                           Spacing="8" />
+                </ScrollView>
+
+                <!-- Stats Card -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="16"
+                       Padding="16"
+                       BorderColor="Transparent">
+                    <Grid ColumnDefinitions="*,*,*">
+                        <VerticalStackLayout Grid.Column="0"
+                                             HorizontalOptions="Center">
+                            <Label x:Name="SemGwaLabel"
+                                   Text="—"
+                                   FontAttributes="Bold"
+                                   FontSize="20"
+                                   TextColor="#1A8C7A"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Sem GWA"
+                                   FontSize="11"
+                                   TextColor="Gray"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             HorizontalOptions="Center">
+                            <Label x:Name="TotalUnitsLabel"
+                                   Text="0"
+                                   FontAttributes="Bold"
+                                   FontSize="20"
+                                   TextColor="#1A1A1A"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Total Units"
+                                   FontSize="11"
+                                   TextColor="Gray"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="2"
+                                             HorizontalOptions="Center">
+                            <Label x:Name="DoneLabel"
+                                   Text="0/0"
+                                   FontAttributes="Bold"
+                                   FontSize="20"
+                                   TextColor="#4CAF50"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Done"
+                                   FontSize="11"
+                                   TextColor="Gray"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- Search Bar -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="12"
+                       Padding="4"
+                       BorderColor="#E0E0E0">
+                    <SearchBar x:Name="SearchBar"
+                               Placeholder="Search subjects..."
+                               BackgroundColor="Transparent"
+                               TextChanged="OnSearchTextChanged" />
+                </Frame>
+
+                <!-- Empty State -->
+                <VerticalStackLayout x:Name="SubjectsEmptyState"
+                                     Spacing="12"
+                                     HorizontalOptions="Center"
+                                     Padding="24"
+                                     IsVisible="False">
+                    <Label Text="📚"
+                           FontSize="48"
+                           HorizontalOptions="Center" />
+                    <Label Text="No subjects yet"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#1A1A1A"
+                           HorizontalOptions="Center" />
+                    <Label Text="Tap the + button to add your first subject"
+                           FontSize="13"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+                    <!-- Add Button -->
+                    <Button Grid.Column="1"
+                            Text="+"
+                            TextColor="White"
+                            BackgroundColor="#2A9D8A"
+                            FontSize="22"
+                            FontAttributes="Bold"
+                            CornerRadius="20"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            VerticalOptions="Center"
+                            Clicked="OnAddSubjectButtonClicked" />
+                </VerticalStackLayout>
+
+                <!-- Subjects List -->
+                <CollectionView x:Name="SubjectsCollection">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="0,4"
+                                   BackgroundColor="White"
+                                   CornerRadius="12"
+                                   Padding="0"
+                                   BorderColor="#F0F0F0">
+                                <Grid ColumnDefinitions="6,*">
+                                    <BoxView Grid.Column="0"
+                                             Color="#F47B20"
+                                             CornerRadius="6" />
+                                    <Grid Grid.Column="1"
+                                          Padding="12"
+                                          ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Grid.Column="0"
+                                                             Spacing="2">
+                                            <Label Text="{Binding Code}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="14"
+                                                   TextColor="#1A1A1A" />
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="13"
+                                                   TextColor="#1A1A1A" />
+                                            <HorizontalStackLayout Spacing="6"
+                                                                    Margin="0,4,0,0">
+                                                <Label Text="{Binding Units, StringFormat='🎓 {0} units'}"
+                                                       FontSize="11"
+                                                       TextColor="Gray" />
+                                                <Label Text="·"
+                                                       FontSize="11"
+                                                       TextColor="Gray" />
+                                                <Label Text="{Binding Professor}"
+                                                       FontSize="11"
+                                                       TextColor="Gray" />
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+
+                                        <Frame Grid.Column="1"
+                                               BackgroundColor="#FFF3E0"
+                                               CornerRadius="8"
+                                               Padding="8,4"
+                                               BorderColor="Transparent"
+                                               VerticalOptions="Start">
+                                            <Label Text="{Binding Status}"
+                                                   TextColor="#F47B20"
+                                                   FontSize="11" />
+                                        </Frame>
+                                    </Grid>
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Tapped="OnSubjectTapped"
+                                        CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                
+                                
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

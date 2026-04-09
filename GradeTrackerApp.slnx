@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="GradeTrackerApp.API/GradeTrackerApp.API.csproj" />
+  <Project Path="GradeTrackerApp/GradeTrackerApp.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>

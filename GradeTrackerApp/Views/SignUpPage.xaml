@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GradeTrackerApp.Views.SignUpPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False">
+
+    <ScrollView>
+        <Grid RowDefinitions="280,*">
+
+            <!-- Teal Header -->
+            <Grid Grid.Row="0"
+                  BackgroundColor="#1A8C7A"
+                  Padding="24,60,24,30">
+                <VerticalStackLayout Spacing="8" VerticalOptions="End">
+                    <Label Text="Join us! ✨"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+                    <Label Text="Start tracking your academic goals"
+                           TextColor="#CCFFFFFF"
+                           FontSize="14" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Form -->
+            <VerticalStackLayout Grid.Row="1" Padding="24" Spacing="16">
+
+                <!-- Toggle -->
+                <Grid ColumnDefinitions="*,*"
+                      BackgroundColor="#F0F0F0"
+                      HeightRequest="48">
+                    <Button Grid.Column="0"
+                            Text="Log In"
+                            BackgroundColor="Transparent"
+                            TextColor="Gray"
+                            CornerRadius="10"
+                            Clicked="OnLogInTabClicked" />
+                    <Button Grid.Column="1"
+                            Text="Sign Up"
+                            BackgroundColor="#1A8C7A"
+                            TextColor="White"
+                            CornerRadius="10" />
+                </Grid>
+
+                <!-- Full Name -->
+                <Label Text="FULL NAME"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Entry x:Name="FullNameEntry"
+                       Placeholder="Juan Dela Cruz"
+                       BackgroundColor="#F5F5F5" />
+
+                <!-- Email -->
+                <Label Text="EMAIL ADDRESS"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Entry x:Name="EmailEntry"
+                       Placeholder="your@email.com"
+                       Keyboard="Email"
+                       BackgroundColor="#F5F5F5" />
+
+                <!-- Student ID (Optional) -->
+                <Label Text="STUDENT ID (Optional)"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Entry x:Name="StudentIdEntry"
+                       Placeholder="e.g. 14-72771"
+                       BackgroundColor="#F5F5F5" />
+
+                <!-- Program -->
+                <Label Text="PROGRAM / COURSE"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Entry x:Name="ProgramEntry"
+                       Placeholder="BS Information Technology"
+                       BackgroundColor="#F5F5F5" />
+
+                <!-- College -->
+                <Label Text="COLLEGE"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Entry x:Name="CollegeEntry"
+                       Placeholder="e.g. SCIS"
+                       BackgroundColor="#F5F5F5" />
+
+                <!-- Year Level -->
+                <Label Text="YEAR LEVEL"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Entry x:Name="YearLevelEntry"
+                       Placeholder="e.g. 3rd Year"
+                       BackgroundColor="#F5F5F5" />
+
+                <!-- Semester -->
+                <Label Text="CURRENT SEMESTER"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Entry x:Name="SemesterEntry"
+                       Placeholder="e.g. 2nd Sem 2025-26"
+                       BackgroundColor="#F5F5F5" />
+
+                <!-- Password -->
+                <Label Text="PASSWORD"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="Gray" />
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Min. 8 characters"
+                       IsPassword="True"
+                       BackgroundColor="#F5F5F5" />
+
+                <!-- Error Label -->
+                <Label x:Name="ErrorLabel"
+                       Text=""
+                       TextColor="Red"
+                       FontSize="13"
+                       IsVisible="False"
+                       HorizontalOptions="Center" />
+
+                <!-- Create Account Button -->
+                <Button Text="Create Account →"
+                        BackgroundColor="#1A8C7A"
+                        TextColor="White"
+                        HeightRequest="52"
+                        CornerRadius="12"
+                        Clicked="OnCreateAccountClicked" />
+
+                <!-- Terms -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                    <Label Text="By signing up, you agree to our"
+                           TextColor="Gray"
+                           FontSize="12" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                    <Label Text="Terms of Service"
+                           TextColor="#1A8C7A"
+                           FontSize="12"
+                           FontAttributes="Bold" />
+                    <Label Text="and"
+                           TextColor="Gray"
+                           FontSize="12" />
+                    <Label Text="Privacy Policy"
+                           TextColor="#1A8C7A"
+                           FontSize="12"
+                           FontAttributes="Bold" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

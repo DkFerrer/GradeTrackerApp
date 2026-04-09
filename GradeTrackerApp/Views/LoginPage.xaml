@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GradeTrackerApp.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False">
+
+    <ScrollView>
+        <Grid RowDefinitions="280,*">
+                <!-- Teal Header -->
+                <Grid Grid.Row="0"
+                      BackgroundColor="#1A8C7A"
+                      Padding="24,60,24,30">
+                    <VerticalStackLayout Spacing="8" VerticalOptions="End">
+                        <Label Text="Welcome! 👋"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               TextColor="White" />
+                        <Label Text="Sign in to continue your journey"
+                               TextColor="#CCFFFFFF"
+                               FontSize="14" />
+                    </VerticalStackLayout>
+                </Grid>
+                <!-- Form -->
+                <VerticalStackLayout Grid.Row="1" Padding="24" Spacing="16">
+                <!-- Toggle: Log In / Sign Up -->
+                <Grid ColumnDefinitions="*,*"
+                      BackgroundColor="#F0F0F0"
+                      HeightRequest="48">
+                   <Button Grid.Column="0"
+                        Text="Log In"
+                        BackgroundColor="#1A8C7A"
+                        TextColor="Black"
+                        CornerRadius="10" />
+                   <Button Grid.Column="1"
+                        Text="Sign Up"
+                        BackgroundColor="Transparent"
+                        TextColor="Gray"
+                        Clicked="OnSignUpTabClicked" />
+                </Grid>
+                <!-- Email -->
+                <Label Text="EMAIL ADDRESS"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="DarkGray"/>
+                <Entry x:Name="EmailEntry"
+                       Placeholder="your@email.com"
+                       Keyboard="Email"
+                       BackgroundColor="#F5F5F5" />
+                <!-- Password -->
+                <Label Text="PASSWORD"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="DarkGray" />
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="password"
+                       IsPassword="True"
+                       BackgroundColor="#F5F5F5" />
+                <!-- Forgot Password -->
+                <Label Text="Forgot password?"
+                       TextColor="#1A8C7A"
+                       HorizontalOptions="End"
+                       FontSize="13" />
+                <!-- Sign In Button -->
+                <Button Text="Sign In →"
+                        BackgroundColor="#1A8C7A"
+                        TextColor="White"
+                        HeightRequest="52"
+                        CornerRadius="12"
+                        Clicked="OnSignInClicked" />
+                <!-- Divider -->
+                <Label Text="or continue with"
+                       HorizontalOptions="Center"
+                       TextColor="Gray" />
+                <!-- Google Button -->
+                <Button Text="Continue with Google"
+                        BackgroundColor="White"
+                        TextColor="#1A1A1A"
+                        BorderColor="#DDDDDD"
+                        BorderWidth="1"
+                        HeightRequest="52"
+                        CornerRadius="12" />
+                <!-- Sign Up Link -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                    <Label Text="Don't have an account?"
+                           TextColor="Gray" />
+                    <Label Text="Sign up"
+                           TextColor="#1A8C7A"
+                           FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSignUpTabClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GradeTrackerApp.Views.PredictorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Orange Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="#F47B20"
+              Padding="24,50,24,20">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Grade Predictor"
+                       TextColor="White"
+                       FontSize="24"
+                       FontAttributes="Bold" />
+                <Label Text="Plan your path to honors"
+                       TextColor="#CCFFFFFF"
+                       FontSize="13" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="16" Padding="16">
+                <!-- Empty State -->
+                <VerticalStackLayout x:Name="PredictorEmptyState"
+                     Spacing="12"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Padding="40"
+                     IsVisible="False">
+                    <Label Text="📊"
+                       FontSize="48"
+                       HorizontalOptions="Center" />
+                    <Label Text="No subjects to predict"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#1A1A1A"
+                       HorizontalOptions="Center" />
+                    <Label Text="Add your subjects first to use the grade predictor"
+                       FontSize="13"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+                    <Button Text="Go to Subjects"
+                        BackgroundColor="#1A8C7A"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="48"
+                        Clicked="OnGoToSubjectsClicked" />
+                </VerticalStackLayout>
+
+                <!-- Target Honor -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="16"
+                       Padding="16"
+                       BorderColor="Transparent">
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="🎯 Target Honor"
+                               FontAttributes="Bold"
+                               FontSize="15"
+                               TextColor="#1A1A1A" />
+
+                        <Grid ColumnDefinitions="*,*"
+                              RowDefinitions="Auto,Auto"
+                              ColumnSpacing="10"
+                              RowSpacing="10">
+
+                            <!-- Summa -->
+                            <Frame x:Name="SummaFrame"
+                                   Grid.Row="0" Grid.Column="0"
+                                   BackgroundColor="#F3E5F5"
+                                   CornerRadius="12" Padding="12"
+                                   BorderColor="Transparent">
+                                <VerticalStackLayout>
+                                    <Label Text="Summa"
+                                           TextColor="#9C27B0"
+                                           FontAttributes="Bold"
+                                           FontSize="13" />
+                                    <Label Text="GWA ≤ 1.2"
+                                           TextColor="#9C27B0"
+                                           FontSize="11" />
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Tapped="OnHonorSelected"
+                                        CommandParameter="Summa" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Magna -->
+                            <Frame x:Name="MagnaFrame"
+                                   Grid.Row="0" Grid.Column="1"
+                                   BackgroundColor="#E3F2FD"
+                                   CornerRadius="12" Padding="12"
+                                   BorderColor="Transparent">
+                                <VerticalStackLayout>
+                                    <Label Text="Magna"
+                                           TextColor="#2196F3"
+                                           FontAttributes="Bold"
+                                           FontSize="13" />
+                                    <Label Text="GWA ≤ 1.3"
+                                           TextColor="#2196F3"
+                                           FontSize="11" />
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Tapped="OnHonorSelected"
+                                        CommandParameter="Magna" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Cum Laude -->
+                            <Frame x:Name="CumLaudeFrame"
+                                   Grid.Row="1" Grid.Column="0"
+                                   BackgroundColor="#E8F5E9"
+                                   CornerRadius="12" Padding="12"
+                                   BorderColor="#4CAF50">
+                                <VerticalStackLayout>
+                                    <Label Text="Cum Laude"
+                                           TextColor="#4CAF50"
+                                           FontAttributes="Bold"
+                                           FontSize="13" />
+                                    <Label Text="GWA ≤ 1.4"
+                                           TextColor="#4CAF50"
+                                           FontSize="11" />
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Tapped="OnHonorSelected"
+                                        CommandParameter="CumLaude" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Dean's -->
+                            <Frame x:Name="DeansFrame"
+                                   Grid.Row="1" Grid.Column="1"
+                                   BackgroundColor="#FFF3E0"
+                                   CornerRadius="12" Padding="12"
+                                   BorderColor="Transparent">
+                                <VerticalStackLayout>
+                                    <Label Text="Dean's"
+                                           TextColor="#F47B20"
+                                           FontAttributes="Bold"
+                                           FontSize="13" />
+                                    <Label Text="GWA ≤ 1.5"
+                                           TextColor="#F47B20"
+                                           FontSize="11" />
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Tapped="OnHonorSelected"
+                                        CommandParameter="Deans" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- GWA Comparison -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="16"
+                       Padding="16"
+                       BorderColor="Transparent">
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="📊 GWA Comparison"
+                               FontAttributes="Bold"
+                               FontSize="15"
+                               TextColor="#1A1A1A" />
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+
+                            <!-- Current GWA -->
+                            <Frame Grid.Column="0"
+                                   BackgroundColor="#F5F5F5"
+                                   CornerRadius="12"
+                                   Padding="16"
+                                   BorderColor="Transparent">
+                                <VerticalStackLayout HorizontalOptions="Center">
+                                    <Label Text="Current GWA"
+                                           TextColor="Gray"
+                                           FontSize="11"
+                                           HorizontalOptions="Center" />
+                                    <Label x:Name="CurrentGwaLabel"
+                                           Text="0.00"
+                                           TextColor="#1A1A1A"
+                                           FontSize="28"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- Target GWA -->
+                            <Frame Grid.Column="1"
+                                   BackgroundColor="#E8F5E9"
+                                   CornerRadius="12"
+                                   Padding="16"
+                                   BorderColor="Transparent">
+                                <VerticalStackLayout HorizontalOptions="Center">
+                                    <Label Text="Target GWA"
+                                           TextColor="Gray"
+                                           FontSize="11"
+                                           HorizontalOptions="Center" />
+                                    <Label x:Name="TargetGwaLabel"
+                                           Text="≤1.40"
+                                           TextColor="#4CAF50"
+                                           FontSize="28"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center" />
+                                    <Label x:Name="TargetHonorLabel"
+                                           Text="Cum Laude"
+                                           TextColor="#4CAF50"
+                                           FontSize="11"
+                                           HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Required Grades -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="16"
+                       Padding="16"
+                       BorderColor="Transparent">
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="📋 Required Grades"
+                               FontAttributes="Bold"
+                               FontSize="15"
+                               TextColor="#1A1A1A" />
+
+                        <CollectionView x:Name="RequiredGradesCollection">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Margin="0,4"
+                                           BackgroundColor="#F9F9F9"
+                                           CornerRadius="12"
+                                           Padding="12"
+                                           BorderColor="#F0F0F0">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <VerticalStackLayout Grid.Column="0">
+                                                <Label Text="{Binding Code}"
+                                                       FontAttributes="Bold"
+                                                       FontSize="13"
+                                                       TextColor="#1A1A1A" />
+                                                <Label Text="{Binding Name}"
+                                                       FontSize="12"
+                                                       TextColor="Gray" />
+                                                <Frame BackgroundColor="#FFF3E0"
+                                                       CornerRadius="6"
+                                                       Padding="6,2"
+                                                       BorderColor="Transparent"
+                                                       HorizontalOptions="Start"
+                                                       Margin="0,4,0,0">
+                                                    <Label Text="⚡ Challenging"
+                                                           TextColor="#F47B20"
+                                                           FontSize="10" />
+                                                </Frame>
+                                            </VerticalStackLayout>
+                                            <VerticalStackLayout Grid.Column="1"
+                                                                 HorizontalOptions="End">
+                                                <Label Text="{Binding RequiredGrade}"
+                                                       FontAttributes="Bold"
+                                                       FontSize="20"
+                                                       TextColor="#1A8C7A"
+                                                       HorizontalOptions="End" />
+                                                <Label Text="Required"
+                                                       FontSize="11"
+                                                       TextColor="Gray"
+                                                       HorizontalOptions="End" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- What-If Simulator -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="16"
+                       Padding="16"
+                       BorderColor="Transparent">
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="⚡ What-If Simulator"
+                               FontAttributes="Bold"
+                               FontSize="15"
+                               TextColor="#1A1A1A" />
+                        <Label Text="Simulate grades for ongoing subjects:"
+                               FontSize="12"
+                               TextColor="Gray" />
+
+                        <CollectionView x:Name="SimulatorCollection">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout Margin="0,8" Spacing="8">
+                                        <Label Text="{Binding SubjectLabel}"
+                                               FontAttributes="Bold"
+                                               FontSize="13"
+                                               TextColor="#1A1A1A" />
+                                        <FlexLayout x:Name="GradeButtons"
+                                                    Wrap="Wrap"
+                                                    Direction="Row">
+                                            <!-- Grade buttons added in code -->
+                                        </FlexLayout>
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Personalized Tips -->
+                <Frame BackgroundColor="#1A8C7A"
+                       CornerRadius="16"
+                       Padding="16"
+                       BorderColor="Transparent"
+                       Margin="0,0,0,24">
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="⚡ Personalized Tips"
+                               FontAttributes="Bold"
+                               FontSize="15"
+                               TextColor="White" />
+
+                        <VerticalStackLayout x:Name="TipsLayout"
+                                             Spacing="8">
+                            <!-- Tips added dynamically -->
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

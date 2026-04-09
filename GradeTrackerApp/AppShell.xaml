@@ -1,0 +1,19 @@
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:GradeTrackerApp.Views"
+       x:Class="GradeTrackerApp.AppShell"
+       Shell.TabBarBackgroundColor="White"
+       Shell.TabBarForegroundColor="{StaticResource Primary}"
+       Shell.TabBarUnselectedColor="Gray">
+
+    <TabBar>
+        <ShellContent Title="Home" Icon="icon_home.png"
+                      ContentTemplate="{DataTemplate views:HomePage}" />
+        <ShellContent Title="Subjects" Icon="icon_book.png"
+                      ContentTemplate="{DataTemplate views:SubjectsPage}" />
+        <ShellContent Title="Predictor" Icon="icon_chart.png"
+                      ContentTemplate="{DataTemplate views:PredictorPage}" />
+        <ShellContent Title="Profile" Icon="icon_profile.png"
+                      ContentTemplate="{DataTemplate views:ProfilePage}" />
+    </TabBar>
+</Shell>
