@@ -5,7 +5,7 @@ using System.Text;
 using GradeTrackerApp.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "7131";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 // Database
 builder.Services.AddDbContext<AppDbContext>(options =>

@@ -1,5 +1,4 @@
-﻿using GradeTrackerApp.Views;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace GradeTrackerApp.Services;
@@ -9,9 +8,12 @@ public class ApiService
     private readonly HttpClient _http;
 
 #if ANDROID
-    private const string BaseUrl = "http://10.14.1.21:7131/api";
+    // Android emulator uses 10.0.2.2 to reach PC localhost
+    private const string BaseUrl =
+        "http://10.0.2.2:7131/api";
 #else
-    private const string BaseUrl = "http://localhost:7131/api";
+    private const string BaseUrl =
+        "http://localhost:7131/api";
 #endif
 
     public ApiService()
@@ -30,15 +32,25 @@ public class ApiService
             new AuthenticationHeaderValue("Bearer", token);
     }
 
-    public async Task<LoginResponse?> LoginAsync(string email, string password)
+    public async Task<LoginResponse?> LoginAsync(
+    string email, string password)
     {
         try
         {
-            var res = await _http.PostAsJsonAsync($"{BaseUrl}/auth/login",
+            var url = $"{BaseUrl}/auth/login";
+            var res = await _http.PostAsJsonAsync(url,
                 new { email, password });
 
             if (!res.IsSuccessStatusCode) return null;
-            return await res.Content.ReadFromJsonAsync<LoginResponse>();
+
+            var content = await res.Content.ReadAsStringAsync();
+
+            return System.Text.Json.JsonSerializer
+                .Deserialize<LoginResponse>(content,
+                    new System.Text.Json.JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
         }
         catch (Exception ex)
         {

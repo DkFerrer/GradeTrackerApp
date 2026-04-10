@@ -23,9 +23,10 @@ public partial class LoginPage : ContentPage
 
         try
         {
-            // Show loading
             var btn = sender as Button;
             if (btn != null) btn.IsEnabled = false;
+
+            
 
             var result = await _api.LoginAsync(
                 EmailEntry.Text.Trim(),
@@ -33,24 +34,24 @@ public partial class LoginPage : ContentPage
 
             if (result == null)
             {
-                await DisplayAlert("Error", "Invalid email or password.", "OK");
+                await DisplayAlert("Failed",
+                    "Result was null - API returned error", "OK");
                 return;
             }
 
-            // Save token & user info
             _api.SetToken(result.Token);
             Preferences.Set("jwt_token", result.Token);
             Preferences.Set("user_name", result.FullName);
             Preferences.Set("user_email", result.Email);
             Preferences.Set("user_program", result.Program);
 
-            // Navigate to main app
             Application.Current!.MainPage = new AppShell();
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error",
-                $"Something went wrong:\n{ex.Message}", "OK");
+            await DisplayAlert("Exception",
+                $"Type: {ex.GetType().Name}\nMessage: {ex.Message}\nInner: {ex.InnerException?.Message}",
+                "OK");
         }
         finally
         {

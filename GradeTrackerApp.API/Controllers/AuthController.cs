@@ -45,12 +45,28 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
-        var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
-        if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-            return Unauthorized("Invalid credentials.");
+        // Debug: check if user exists
+        var user = await _db.Users
+            .FirstOrDefaultAsync(u => u.Email == dto.Email);
+
+        if (user == null)
+            return Unauthorized($"No user found with email: {dto.Email}");
+
+        // Debug: check password
+        var passwordValid = BCrypt.Net.BCrypt.Verify(
+            dto.Password, user.PasswordHash);
+
+        if (!passwordValid)
+            return Unauthorized($"Password incorrect for: {dto.Email}");
 
         var token = GenerateJwtToken(user);
-        return Ok(new { token, user.FullName, user.Email, user.Program });
+        return Ok(new
+        {
+            token,
+            user.FullName,
+            user.Email,
+            user.Program
+        });
     }
 
     private string GenerateJwtToken(User user)
